@@ -2,8 +2,8 @@
 
 vllm==0.7.3
 pydantic==2.10.6
-torch==2.5.1
-torchaudio==2.5.1
+#torch==2.5.1
+#torchaudio==2.5.1
 
 conformer==0.3.2
 
