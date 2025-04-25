@@ -98,7 +98,7 @@ def construct_request(args, tts_text):
 
 
 async def main(args):
-    async with aio.insecure_channel(f"{args.host}:{args.port}") as channel:
+    async with aio.insecure_channel(f"{args.host}") as channel:
         stub = cosyvoice_pb2_grpc.CosyVoiceStub(channel)
 
         # 异步流式接收响应
@@ -189,7 +189,7 @@ def multiprocess_main(args):
     logging.info(f"Total time: {time.monotonic() - start_time:.2f}s")
 
 async def register_spk(args):
-    async with aio.insecure_channel(f"{args.host}:{args.port}") as channel:
+    async with aio.insecure_channel(f"{args.host}") as channel:
         stub = cosyvoice_pb2_grpc.CosyVoiceStub(channel)
         audio_data = load_wav(args.prompt_wav, 16000)
         audio_bytes, sr = convert_audio_ndarray_to_bytes(audio_data), 16000
@@ -200,8 +200,7 @@ async def register_spk(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--host', type=str, default='0.0.0.0')
-    parser.add_argument('--port', type=int, default=50000)
+    parser.add_argument('--host', type=str, default='0.tcp.ngrok.io:17587')
     parser.add_argument('--mode', default='zero_shot_by_spk_id',
                         choices=['sft', 'zero_shot', 'cross_lingual', 'instruct2',
                                  'instruct2_by_spk_id', 'zero_shot_by_spk_id', 'register_spk'],
@@ -233,3 +232,6 @@ if __name__ == "__main__":
 
     # python client.py --mode zero_shot_by_spk_id --spk_id 001 --stream_input --tts_text 你好，请问有什么可以帮您的吗？ --format "" --stream
     # python client.py --mode zero_shot_by_spk_id --spk_id 001 --input_file text.txt --max_conc 10 --output_path output
+
+
+# python client.py --host 0.tcp.ngrok.io:17587 --mode zero_shot --prompt_text 坏女人创记录超过三十分钟，那是因为以前看到小星星就烦了，根本不想跟小星见面但是，我不知道为什么我对你们有一种特别的感觉。 --prompt_wav badXT_71.wav --tts_text 尊师重道。那时候他很希望我可以考上音乐系，然后读大学这样。对但我大概考了两次吧，可能我不是读书的料，而且我又很爱打球。也不知道自己心里是怎么搞的。 --format ""
