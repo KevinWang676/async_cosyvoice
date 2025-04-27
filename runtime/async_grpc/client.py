@@ -231,8 +231,6 @@ if __name__ == "__main__":
         else:
             asyncio.run(main(args))
 
-    # python client.py --mode zero_shot_by_spk_id --spk_id 001 --stream_input --tts_text 你好，请问有什么可以帮您的吗？ --stream
-    # python client.py --mode zero_shot_by_spk_id --spk_id 001 --input_file text.txt --max_conc 10 --output_path output
 
-
-# python client.py --host 0.tcp.ngrok.io:17587 --mode zero_shot --prompt_text 坏女人创记录超过三十分钟，那是因为以前看到小星星就烦了，根本不想跟小星见面但是，我不知道为什么我对你们有一种特别的感觉。 --prompt_wav badXT_71.wav --tts_text 尊师重道。那时候他很希望我可以考上音乐系，然后读大学这样。对但我大概考了两次吧，可能我不是读书的料，而且我又很爱打球。也不知道自己心里是怎么搞的。 --format ""
+# python client.py --host 4.tcp.ngrok.io:16516 --mode zero_shot --prompt_text {reference audio transcription} --prompt_wav {reference audio file} --tts_text {user input texts}
+# python client.py --host 4.tcp.ngrok.io:16516 --mode instruct2 --instruct_text {speech instruction texts} --prompt_wav {reference audio file} --tts_text {user input texts}
