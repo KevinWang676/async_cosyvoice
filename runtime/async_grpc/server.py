@@ -219,6 +219,7 @@ class CosyVoiceServiceImpl(cosyvoice_pb2_grpc.CosyVoiceServicer):
         finally:
             # free any cached GPU memory after generation completes
             torch.cuda.empty_cache()
+            print("已运行：empty_cache！")
         # ───────────
 
 
